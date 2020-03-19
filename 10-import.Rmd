@@ -1,0 +1,31 @@
+---
+title: "10-import"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(gganimate)
+library(plotly)
+library(readxl)
+library(lubridate)
+library(gifski)
+```
+
+
+```{r}
+abroad_raw <- read_excel("data/【海外】疫情数据.xlsx")
+```
+
+```{r}
+data <- abroad_raw %>% 
+  select(-name) %>% 
+  pivot_longer(-country, names_to = "date", values_to = "number",values_drop_na = TRUE)%>%
+  mutate(date = as.integer(date)) %>% 
+  mutate(date = as.Date(date, origin="1899-12-30")) 
+  
+```
+
+
+

@@ -1,0 +1,36 @@
+---
+title: "20-exploratory-data-analysis"
+output: html_notebook
+---
+
+```{r}
+line <- data %>%
+  ggplot(aes(x = date, y = number, group = country)) +
+  geom_line(aes(color = country), size = 2, alpha = 0.5) +
+  geom_point(aes(color = country), size = 3) +
+  geom_text(
+    aes(label = country),
+    #color = "black",
+    check_overlap = TRUE,
+    hjust = 0,
+    nudge_x = 0.3
+  ) +
+  ggdark::dark_theme_bw() +
+  theme(plot.title = element_text(face = "bold", size = 20))+
+  guides(color = FALSE) +
+  labs(title = paste0('COVID-19 non-China cases at ','{frame_along}'),
+       y = "Case number",
+       x = "Date")+
+  transition_reveal(date) +
+  view_follow() +
+  ease_aes(default = 'linear')
+
+```
+
+
+```{r}
+animate(line, width = 1000, height = 500, renderer = gifski_renderer(),duration=20,rewind=FALSE,end_pause=1)
+anim_save("output.gif")
+```
+
+
