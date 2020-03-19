@@ -1750,41 +1750,42 @@ summary {
 
 
 <!-- rnb-text-begin -->
+<p><strong>Note:</strong> The content of this article is based on the data what was collected by the project team of Professor Ziqi Qi, School of Mathematics and Statistics, Central South University (China). The data used for this analysis are not complete.</p>
+<div id="import" class="section level1">
+<h1>10-import</h1>
+<p>Load the necessary packages.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGdncGxvdDIpXG5saWJyYXJ5KGdnYW5pbWF0ZSlcbmxpYnJhcnkocGxvdGx5KVxubGlicmFyeShyZWFkeGwpXG5saWJyYXJ5KGx1YnJpZGF0ZSlcbmxpYnJhcnkoZ2lmc2tpKVxuYGBgIn0= -->
-<pre class="r"><code>library(tidyverse)
-library(ggplot2)
-library(gganimate)
-library(plotly)
-library(readxl)
-library(lubridate)
-library(gifski)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGdncGxvdDIpXG5saWJyYXJ5KGdnYW5pbWF0ZSlcbmxpYnJhcnkocGxvdGx5KVxubGlicmFyeShyZWFkeGwpXG5saWJyYXJ5KGx1YnJpZGF0ZSlcbmxpYnJhcnkoZ2lmc2tpKVxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r library(tidyverse) library(ggplot2) library(gganimate) library(plotly) library(readxl) library(lubridate) library(gifski)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Read data from Excel.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWJyb2FkX3JhdyA8LSByZWFkX2V4Y2VsKFwiZGF0YS/jgJDmtbflpJbjgJHnlqvmg4XmlbDmja4ueGxzeFwiKVxuYGBgIn0= -->
-<pre class="r"><code>abroad_raw &lt;- read_excel(&quot;data/【海外】疫情数据.xlsx&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYWJyb2FkX3JhdyA8LSByZWFkX2V4Y2VsKFxcZGF0YS/jgJDmtbflpJbjgJHnlqvmg4XmlbDmja4ueGxzeFxcKVxuYGBgXG5gYGAifQ== -->
+<p><code>r</code>r abroad_raw &lt;- read_excel(/【海外】疫情数据.xlsx)</p>
+<pre><code></code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Convert wide tables to long tables and process date data into a usable form.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YSA8LSBhYnJvYWRfcmF3ICU+JSBcbiAgc2VsZWN0KC1uYW1lKSAlPiUgXG4gIHBpdm90X2xvbmdlcigtY291bnRyeSwgbmFtZXNfdG8gPSBcImRhdGVcIiwgdmFsdWVzX3RvID0gXCJudW1iZXJcIix2YWx1ZXNfZHJvcF9uYSA9IFRSVUUpJT4lXG4gIG11dGF0ZShkYXRlID0gYXMuaW50ZWdlcihkYXRlKSkgJT4lIFxuICBtdXRhdGUoZGF0ZSA9IGFzLkRhdGUoZGF0ZSwgb3JpZ2luPVwiMTg5OS0xMi0zMFwiKSkgXG4gIFxuYGBgIn0= -->
-<pre class="r"><code>data &lt;- abroad_raw %&gt;% 
-  select(-name) %&gt;% 
-  pivot_longer(-country, names_to = &quot;date&quot;, values_to = &quot;number&quot;,values_drop_na = TRUE)%&gt;%
-  mutate(date = as.integer(date)) %&gt;% 
-  mutate(date = as.Date(date, origin=&quot;1899-12-30&quot;)) 
-  </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZGF0YSA8LSBhYnJvYWRfcmF3ICU+JSBcbiAgc2VsZWN0KC1uYW1lKSAlPiUgXG4gIHBpdm90X2xvbmdlcigtY291bnRyeSwgbmFtZXNfdG8gPSBcXGRhdGVcXCwgdmFsdWVzX3RvID0gXFxudW1iZXJcXCx2YWx1ZXNfZHJvcF9uYSA9IFRSVUUpJT4lXG4gIG11dGF0ZShkYXRlID0gYXMuaW50ZWdlcihkYXRlKSkgJT4lIFxuICBtdXRhdGUoZGF0ZSA9IGFzLkRhdGUoZGF0ZSwgb3JpZ2luPVxcMTg5OS0xMi0zMFxcKSkgXG4gIFxuYGBgXG5gYGAifQ== -->
+<code>r</code>r data &lt;- abroad_raw %&gt;% select(-name) %&gt;% pivot_longer(-country, names_to =
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiMTAtaW1wb3J0IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeShnZ2FuaW1hdGUpCmxpYnJhcnkocGxvdGx5KQpsaWJyYXJ5KHJlYWR4bCkKbGlicmFyeShsdWJyaWRhdGUpCmxpYnJhcnkoZ2lmc2tpKQpgYGAKCgpgYGB7cn0KYWJyb2FkX3JhdyA8LSByZWFkX2V4Y2VsKCJkYXRhL+OAkOa1t+WkluOAkeeWq+aDheaVsOaNri54bHN4IikKYGBgCgpgYGB7cn0KZGF0YSA8LSBhYnJvYWRfcmF3ICU+JSAKICBzZWxlY3QoLW5hbWUpICU+JSAKICBwaXZvdF9sb25nZXIoLWNvdW50cnksIG5hbWVzX3RvID0gImRhdGUiLCB2YWx1ZXNfdG8gPSAibnVtYmVyIix2YWx1ZXNfZHJvcF9uYSA9IFRSVUUpJT4lCiAgbXV0YXRlKGRhdGUgPSBhcy5pbnRlZ2VyKGRhdGUpKSAlPiUgCiAgbXV0YXRlKGRhdGUgPSBhcy5EYXRlKGRhdGUsIG9yaWdpbj0iMTg5OS0xMi0zMCIpKSAKICAKYGBgCgoKCg==</div>
+<p>values_to = ,values_drop_na = TRUE)%&gt;% mutate(date = as.integer(date)) %&gt;% mutate(date = as.Date(date, origin=\1899-12-30))</p>
+<pre><code></code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiMTAtaW1wb3J0IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgoKKipOb3RlOioqIFRoZSBjb250ZW50IG9mIHRoaXMgYXJ0aWNsZSBpcyBiYXNlZCBvbiB0aGUgZGF0YSB3aGF0IHdhcyBjb2xsZWN0ZWQgYnkgdGhlIHByb2plY3QgdGVhbSBvZiBQcm9mZXNzb3IgWmlxaSBRaSwgU2Nob29sIG9mIE1hdGhlbWF0aWNzIGFuZCBTdGF0aXN0aWNzLCBDZW50cmFsIFNvdXRoIFVuaXZlcnNpdHkgKENoaW5hKS4gVGhlIGRhdGEgdXNlZCBmb3IgdGhpcyBhbmFseXNpcyBhcmUgbm90IGNvbXBsZXRlLgoKIyAxMC1pbXBvcnQKCkxvYWQgdGhlIG5lY2Vzc2FyeSBwYWNrYWdlcy4KCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShnZ3Bsb3QyKQpsaWJyYXJ5KGdnYW5pbWF0ZSkKbGlicmFyeShwbG90bHkpCmxpYnJhcnkocmVhZHhsKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShnaWZza2kpCmBgYAoKUmVhZCBkYXRhIGZyb20gRXhjZWwuCgpgYGB7cn0KYWJyb2FkX3JhdyA8LSByZWFkX2V4Y2VsKCJkYXRhL+OAkOa1t+WkluOAkeeWq+aDheaVsOaNri54bHN4IikKYGBgCgpDb252ZXJ0IHdpZGUgdGFibGVzIHRvIGxvbmcgdGFibGVzIGFuZCBwcm9jZXNzIGRhdGUgZGF0YSBpbnRvIGEgdXNhYmxlIGZvcm0uCgpgYGB7cn0KZGF0YSA8LSBhYnJvYWRfcmF3ICU+JSAKICBzZWxlY3QoLW5hbWUpICU+JSAKICBwaXZvdF9sb25nZXIoLWNvdW50cnksIG5hbWVzX3RvID0gImRhdGUiLCB2YWx1ZXNfdG8gPSAibnVtYmVyIix2YWx1ZXNfZHJvcF9uYSA9IFRSVUUpJT4lCiAgbXV0YXRlKGRhdGUgPSBhcy5pbnRlZ2VyKGRhdGUpKSAlPiUgCiAgbXV0YXRlKGRhdGUgPSBhcy5EYXRlKGRhdGUsIG9yaWdpbj0iMTg5OS0xMi0zMCIpKSAKICAKYGBgCgoKCg==</div>
 
 
 

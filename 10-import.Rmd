@@ -3,6 +3,13 @@ title: "10-import"
 output: html_notebook
 ---
 
+
+**Note:** The content of this article is based on the data what was collected by the project team of Professor Ziqi Qi, School of Mathematics and Statistics, Central South University (China). The data used for this analysis are not complete.
+
+# 10-import
+
+Load the necessary packages.
+
 ```{r}
 library(tidyverse)
 library(ggplot2)
@@ -13,10 +20,13 @@ library(lubridate)
 library(gifski)
 ```
 
+Read data from Excel.
 
 ```{r}
 abroad_raw <- read_excel("data/【海外】疫情数据.xlsx")
 ```
+
+Convert wide tables to long tables and process date data into a usable form.
 
 ```{r}
 data <- abroad_raw %>% 
